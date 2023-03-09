@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Content.belongsTo(models.RecordType, {
-        foreignKey: 'content_type_id'
+        foreignKey: 'record_type_id'
       });
       Content.belongsTo(models.Collection, {
         foreignKey: 'collection_id'
