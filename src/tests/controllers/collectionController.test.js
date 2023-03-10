@@ -2,13 +2,13 @@ const collectionController = require('../../controllers/collectionController');
 const collectionService = require('../../services/collectionService');
 
 describe('Collection Controller', () => {
-  describe('listCollections', () => {
+  describe('getAllCollections', () => {
     const mockData = {
       name: 'test',
     };
 
     it('should return a list of collections', async () => {
-      jest.spyOn(collectionService, 'listCollections').mockResolvedValue(mockData);
+      jest.spyOn(collectionService, 'getAllCollections').mockResolvedValue(mockData);
 
       const req = {
         body: jest.fn(),
@@ -19,13 +19,13 @@ describe('Collection Controller', () => {
         json: jest.fn(),
       };
 
-      await collectionController.listCollections(req, res);
+      await collectionController.getAllCollections(req, res);
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({ data: mockData });
     });
 
     it('should return an error if the collection does not exist', async () => {
-      jest.spyOn(collectionService, 'listCollections').mockRejectedValue(new Error('Collection does not exist'));
+      jest.spyOn(collectionService, 'getAllCollections').mockRejectedValue(new Error('Collection does not exist'));
 
       const req = {
         body: mockData,
@@ -36,19 +36,19 @@ describe('Collection Controller', () => {
         json: jest.fn(),
       };
 
-      await collectionController.listCollections(req, res);
+      await collectionController.getAllCollections(req, res);
       expect(res.status).toHaveBeenCalledWith(500);
       expect(res.json).toHaveBeenCalledWith({ error: 'Collection does not exist' });
     });
   });
 
-  describe('addRecord', () => {
+  describe('addCollectionToRecord', () => {
     const mockData = {
       name: 'test',
     };
 
     it('should add a record to a collection', async () => {
-      jest.spyOn(collectionService, 'addRecord').mockResolvedValue(mockData);
+      jest.spyOn(collectionService, 'addCollectionToRecord').mockResolvedValue(mockData);
 
       const req = {
         body: mockData,
@@ -59,13 +59,13 @@ describe('Collection Controller', () => {
         json: jest.fn(),
       };
 
-      await collectionController.addRecord(req, res);
+      await collectionController.addCollectionToRecord(req, res);
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({ data: mockData });
     });
 
     it('should return an error if the collection does not exist', async () => {
-      jest.spyOn(collectionService, 'addRecord').mockRejectedValue(new Error('Collection does not exist'));
+      jest.spyOn(collectionService, 'addCollectionToRecord').mockRejectedValue(new Error('Collection does not exist'));
 
       const req = {
         body: mockData,
@@ -76,7 +76,7 @@ describe('Collection Controller', () => {
         json: jest.fn(),
       };
 
-      await collectionController.addRecord(req, res);
+      await collectionController.addCollectionToRecord(req, res);
       expect(res.status).toHaveBeenCalledWith(500);
       expect(res.json).toHaveBeenCalledWith({ error: 'Collection does not exist' });
     });

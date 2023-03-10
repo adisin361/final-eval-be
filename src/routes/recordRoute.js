@@ -1,18 +1,19 @@
 const express = require('express');
 
 const router = express.Router();
+const validate = require('../middlewares/authValidation');
 
 const recordController = require('../controllers/recordController');
 
 router.route('/save')
-  .post(recordController.createRecordType);
+  .post(validate.validationOfToken, recordController.createRecordType);
 
 router.route('/field')
-  .post(recordController.addColumn)
-  .patch(recordController.editColumnName)
-  .delete(recordController.deleteColumnRecordType);
+  .post(validate.validationOfToken, recordController.addColumn)
+  .patch(validate.validationOfToken, recordController.editColumnName)
+  .delete(validate.validationOfToken, recordController.deleteColumnRecordType);
 
 router.route('/update')
-  .post(recordController.updateRecordType);
+  .post(validate.validationOfToken, recordController.updateRecordType);
 
 module.exports = router;

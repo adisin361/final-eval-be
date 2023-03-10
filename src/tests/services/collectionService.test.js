@@ -9,7 +9,7 @@ describe('Collection Service', () => {
 
     jest.spyOn(Collection, 'findAll').mockResolvedValue(mockData);
 
-    const data = await collectionService.listCollections();
+    const data = await collectionService.getAllCollections();
     expect(data).toEqual(mockData);
   });
 
@@ -17,7 +17,7 @@ describe('Collection Service', () => {
     jest.spyOn(Collection, 'findAll').mockRejectedValue(new Error('Collection does not exist'));
 
     try {
-      await collectionService.listCollections();
+      await collectionService.getAllCollections();
     } catch (e) {
       expect(e.message).toEqual('Collection does not exist');
     }
@@ -27,7 +27,7 @@ describe('Collection Service', () => {
     jest.spyOn(Collection, 'create').mockRejectedValue(new Error('Collection does not exist'));
 
     try {
-      await collectionService.addRecord();
+      await collectionService.addCollectionToRecord();
     } catch (e) {
       expect(e.message).toEqual('Collection does not exist');
     }

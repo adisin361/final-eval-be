@@ -136,7 +136,6 @@ const deleteColumnRecordType = async (id, field_name) => {
       id
     }
   });
-
   const newFields = { ...recordType.field };
   delete newFields[field_name];
   await RecordType.update({

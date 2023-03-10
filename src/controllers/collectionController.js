@@ -1,8 +1,8 @@
 const collectionServices = require('../services/collectionService');
 
-const listCollections = async (req, res) => {
+const getAllCollections = async (req, res) => {
   try {
-    const data = await collectionServices.listCollections();
+    const data = await collectionServices.getAllCollections();
     res.status(200).json({
       data: data,
     });
@@ -15,10 +15,10 @@ const listCollections = async (req, res) => {
   }
 };
 
-const addRecord = async (req, res) => {
+const addCollectionToRecord = async (req, res) => {
   try {
     const { collection_id, record } = req.body;
-    const data = await collectionServices.addRecord(collection_id, record);
+    const data = await collectionServices.addCollectionToRecord(collection_id, record);
     res.status(200).json({
       data: data,
     });
@@ -47,10 +47,10 @@ const editRecord = async (req, res) => {
   }
 };
 
-const getDataOfCollection = async (req, res) => {
+const getCollectionData = async (req, res) => {
   try {
     const { collection_id } = req.body;
-    const data = await collectionServices.getDataOfCollection(collection_id);
+    const data = await collectionServices.getCollectionData(collection_id);
     res.status(200).json({
       data: data,
     });
@@ -81,4 +81,4 @@ const deleteRecord = async (req, res) => {
 
 
 
-module.exports = { listCollections, addRecord, editRecord, getDataOfCollection, deleteRecord };
+module.exports = { getAllCollections, addCollectionToRecord, editRecord, getCollectionData, deleteRecord };

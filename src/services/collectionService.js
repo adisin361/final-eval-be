@@ -1,11 +1,11 @@
 /* eslint-disable indent */
 const { Collection, Content, RecordType } = require('./../../database/models');
 
-const listCollections = async () => {
+const getAllCollections = async () => {
   return await Collection.findAll();
 };
 
-const addRecord = async (collection_id, record) => {
+const addCollectionToRecord = async (collection_id, record) => {
   const collection = await Collection.findOne({
     where:
     {
@@ -54,7 +54,7 @@ const editRecord = async (collection_id, record) => {
   };
 };
 
-const getDataOfCollection = async (collection_id) => {
+const getCollectionData = async (collection_id) => {
   const collection = await Collection.findOne({
     where:
     {
@@ -93,4 +93,4 @@ const deleteRecord = async (collection_id, record_id) => {
   };
 };
 
-module.exports = { listCollections, addRecord, editRecord, getDataOfCollection, deleteRecord };
+module.exports = { getAllCollections, addCollectionToRecord, editRecord, getCollectionData, deleteRecord };

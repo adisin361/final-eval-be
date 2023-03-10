@@ -1,19 +1,20 @@
 const express = require('express');
 const router = express.Router();
+const { validationOfToken } = require('../middlewares/authValidation');
 
 const collectionController = require('../controllers/collectionController');
 
 router.route('/save')
-  .post(collectionController.addRecord);
+  .post(validationOfToken, collectionController.addCollectionToRecord);
 
 router.route('/update')
-  .post(collectionController.editRecord);
+  .post(validationOfToken, collectionController.editRecord);
 
 router.route('/field')
-  .delete(collectionController.deleteRecord);
+  .delete(validationOfToken, collectionController.deleteRecord);
 
 router.route('/details')
-  .get(collectionController.listCollections)
-  .post(collectionController.getDataOfCollection);
+  .get(validationOfToken, collectionController.getAllCollections)
+  .post(validationOfToken, collectionController.getCollectionData);
 
 module.exports = router;
