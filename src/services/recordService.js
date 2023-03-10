@@ -171,4 +171,15 @@ const deleteColumnRecordType = async (id, field_name) => {
   };
 };
 
-module.exports = { createRecordType, updateRecordType, addColumn, editColumnName, deleteColumnRecordType };
+const getRecordTypeById = async (id) => {
+  const response = await RecordType.findOne({
+    where: {
+      collection_id: id
+    }
+  });
+  console.log(response);
+  return response;
+};
+
+
+module.exports = { createRecordType, updateRecordType, addColumn, editColumnName, deleteColumnRecordType, getRecordTypeById };

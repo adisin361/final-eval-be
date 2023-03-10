@@ -80,4 +80,19 @@ const deleteColumnRecordType = async (req, res) => {
   }
 };
 
-module.exports = { createRecordType, updateRecordType, addColumn, editColumnName, deleteColumnRecordType };
+const getRecordTypeById = async (req, res) => {
+  try {
+    const recordId = req.body.id;
+    const recordType = await recordService.getRecordTypeById(recordId);
+    res.status(200).json({
+      data: recordType
+    });
+  }
+  catch (error) {
+    res.status(500).json({
+      error: error.message
+    });
+  }
+};
+
+module.exports = { createRecordType, updateRecordType, addColumn, editColumnName, deleteColumnRecordType, getRecordTypeById };

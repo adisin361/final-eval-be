@@ -16,4 +16,7 @@ router.route('/field')
 router.route('/update')
   .post(validate.validationOfToken, recordController.updateRecordType);
 
+router.route('/details')
+  .post(validate.validationOfToken, recordController.getRecordTypeById);
+
 module.exports = router;
