@@ -3,7 +3,7 @@ const { RecordType, Collection, Content } = require('../../database/models');
 
 const createRecordType = async (name) => {
   const newCollection = await Collection.create({
-    name
+    name,
   });
   return RecordType.create({
     name, collection_id: newCollection.id
@@ -51,7 +51,7 @@ const addColumn = async (id, field_name, field_type) => {
   const newFields = { ...recordType.field };
   newFields[field_name] = field_type;
   await RecordType.update({
-    field: newFields
+    fields: newFields
   },
     {
       where:
@@ -67,10 +67,10 @@ const addColumn = async (id, field_name, field_type) => {
   });
 
   await Promise.all(allContent.map((record) => {
-    const newValue = { ...record.value };
+    const newValue = { ...record.values };
     newValue[field_name] = null;
     Content.update({
-      value: newValue
+      values: newValue
     }, {
       where: {
         id: record.id
